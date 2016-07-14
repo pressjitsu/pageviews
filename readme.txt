@@ -26,9 +26,26 @@ If you need any setup assistance or help migrating your existing views counts fr
 
 == Installation ==
 
+Installing via the WordPress dashboard:
+
+1. Browse to Plugins - Add New in your WordPress dashboard.
+1. Search for "pageviews" using the search box on the right.
+1. Find the Pageviews plugin in the search results and click Install Now.
+
+Installing via FTP:
+
 1. Upload the plugin files to the `/wp-content/plugins/pageviews` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Enjoy
+1. Activate the plugin through the 'Plugins' screen in WordPress.
+1. Enjoy.
+
+Installing via WP-CLI:
+
+`wp plugin install pageviews --activate`
+
+Installing via Git:
+
+`cd wp-content/plugins
+git clone https://github.com/pressjitsu/pageviews.git`
 
 For an installation and configuration guide please visit the [full documentation](https://github.com/pressjitsu/pageviews).
 
