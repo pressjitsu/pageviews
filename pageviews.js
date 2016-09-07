@@ -3,45 +3,69 @@
 	if (!_pv_config.account)
 		return;
 
-	var config = _pv_config,
-		keys = [],
-		elements = {};
+	$(document).on('pageviews-update', function() {
+		var config = _pv_config,
+			keys = [],
+			elements = {};
 
-	$('.pageviews-placeholder').each(function() {
-		var $el = $(this),
-			key = $el.data('key');
+		$('.pageviews-placeholder').each(function() {
+			var $el = $(this),
+				key = $el.data('key');
 
-		if (key != config.incr)
-			keys.push(key);
+			// Don't process already processed containers.
+			if ($el.data('pv-processed'))
+				return;
 
-		elements[key] = $el;
+			if (key != config.incr)
+				keys.push(key);
+
+			if (!elements[key])
+				elements[key] = [];
+
+			elements[key].push($el);
+		});
+
+		if (config.incr) {
+			$.ajax({
+				method: 'post',
+				url: config.base + '/incr/' + config.incr,
+				headers: {'X-Account': config.account}
+			}).done(function(e){
+				for (var i in e) {
+					if (elements[i]) {
+						for (var j in elements[i]) {
+							elements[i][j].text(e[i]);
+						}
+					}
+				}
+			});
+		}
+
+		if (keys.length > 0) {
+			$.ajax({
+				method: 'get',
+				url: config.base + '/get/' + keys.join(','),
+				headers: {'X-Account': config.account}
+			}).done(function(e){
+				var el;
+
+				for (var i in e) {
+					if (elements[i]) {
+						for (var j in elements[i]) {
+							el = elements[i][j];
+							el.text(e[i]);
+							el.data('pv-processed', 1);
+						}
+					}
+				}
+			});
+		}
 	});
 
-	if (config.incr) {
-		$.ajax({
-			method: 'post',
-			url: config.base + '/incr/' + config.incr,
-			headers: {'X-Account': config.account}
-		}).done(function(e){
-			for (var i in e) {
-				if (elements[i]) {
-					elements[i].text(e[i]);
-				}
-			}
-		});
-	}
+	$(document).trigger('pageviews-update');
 
-	if (keys.length > 0) {
-		$.ajax({
-			method: 'get',
-			url: config.base + '/get/' + keys.join(','),
-			headers: {'X-Account': config.account}
-		}).done(function(e){
-			for (var i in e) {
-				if (elements[i]) {
-					elements[i].text(e[i]);
-				}
-			}
-		});
-	}
+	// Support for Jetpack's infinite scroll.
+	$(document.body).on('post-load', function() {
+		$(document).trigger('pageviews-update');
+	});
 }(jQuery));

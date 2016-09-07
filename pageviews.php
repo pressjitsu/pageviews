@@ -9,7 +9,7 @@
 
 class Pageviews {
 	private static $_incr;
-	private static $_js_version = 3;
+	private static $_js_version = 4;
 	private static $_config;
 	private static $_base = 'https://pv.pjtsu.com/v1';
 
