@@ -3,7 +3,7 @@ Contributors: pressjitsu, soulseekah
 Tags: pageviews, analytics, counter, views, hits, stats
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -49,7 +49,18 @@ git clone https://github.com/pressjitsu/pageviews.git`
 
 For an installation and configuration guide please visit the [full documentation](https://github.com/pressjitsu/pageviews).
 
+== Screenshots ==
+
+1. Customized implementation of the pageviews output, styled specifically for this theme
+2. Simple replacement for WP-PostViews and other popular plugins with inherited styles
+3. Default output of the views counter for themes that don't provide explicit support for this plugin
+
 == Changelog ==
+
+= 0.9.2 =
+* Add support for multiple containers per page for a single key
+* Add support for Jetpack's Infinite Scroll module
+* Wrap the JS code into a triggerable event
 
 = 0.9.1 =
 * Initial public release
