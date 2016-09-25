@@ -3,7 +3,7 @@
  * Plugin Name: Pageviews
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
  * Plugin URI: https://github.com/pressjitsu/pageviews/
- * Version: 0.9.1
+ * Version: 0.9.2
  * License: GPLv3 or later
  */
 
