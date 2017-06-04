@@ -34,12 +34,13 @@ class Pageviews_REST_Controller {
 			return false;
 		}
 
-		if ( empty( $request->get_param( 'token' ) ) ) {
+		$token = $request->get_param( 'token' );
+		if ( empty( $token ) ) {
 			return false;
 		}
 
 		// Authentication token is valid.
-		if ( hash_equals( $auth['token'], $request->get_param( 'token' ) ) ) {
+		if ( hash_equals( $auth['token'], $token ) ) {
 			return true;
 		}
 
