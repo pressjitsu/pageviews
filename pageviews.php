@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pageviews
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
- * Plugin URI: https://github.com/pressjitsu/pageviews/
+ * Plugin URI: https://pageviews.io
  * Version: 0.9.2
  * License: GPLv3 or later
  */
@@ -13,7 +13,10 @@ class Pageviews {
 	private static $_config;
 	private static $_base = 'https://pv.pjtsu.com/v1';
 
-	public static function init() {
+	public static $_base_sync = 'https://pageviews.io';
+
+	public static function load() {
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/rest-controller.php' );
 		add_action( 'template_redirect', array( __CLASS__, 'template_redirect' ) );
 	}
 
@@ -121,4 +124,4 @@ class Pageviews {
 	}
 }
 
-add_action( 'init', array( 'Pageviews', 'init' ) );
+Pageviews::load();
