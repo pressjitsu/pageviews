@@ -18,6 +18,10 @@ class Pageviews {
 	public static function load() {
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/rest-controller.php' );
 		add_action( 'template_redirect', array( __CLASS__, 'template_redirect' ) );
+
+		// Admin notices + dismiss handler.
+		add_action( 'admin_notices', array( __CLASS__, 'admin_notices' ) );
+		add_action( 'wp_ajax_pageviews-dismiss-notice', array( __CLASS__, 'ajax_dimsiss_notice' ) );
 	}
 
 	public static function template_redirect() {
@@ -31,6 +35,40 @@ class Pageviews {
 			add_action( 'the_content', array( __CLASS__, 'compat_the_content' ) );
 			add_action( 'wp_head', array( __CLASS__, 'compat_wp_head' ) );
 		}
+	}
+
+	/**
+	 * Output admin notices (unless dismissed)
+	 */
+	public static function admin_notices() {
+		$key = 'pageviews-sync-nag';
+		$config = self::get_config();
+
+		if ( ! empty( $config['notice-dismissed'] ) )
+			return;
+
+		// Display a different notice based on whether the user is new or existing.
+		if ( ! empty( $config['account'] ) ) {
+			$message = 'Thank you for using Pageviews! <strong>Sync your numbers</strong> from Google Analytics and other services with <a href="https://pageviews.io/sync/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=existing" target="_blank">Pageviews Sync</a>.';
+		} else {
+			$message = 'Thank you for using Pageviews! <strong>Don\'t start from scratch!</strong> Import existing numbers from Google Analytics and other services with <a href="https://pageviews.io/sync/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=new" target="_blank">Pageviews Sync</a>.';
+		}
+
+		include_once plugin_dir_path( __FILE__ ) . 'templates/admin-notice.php';
+	}
+
+	public static function ajax_dimsiss_notice() {
+		if ( empty( $_REQUEST['nonce'] ) )
+			return wp_send_json_error();
+
+		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'pageviews-dismiss-notice' ) )
+			return wp_send_json_error();
+
+		$config = self::get_config();
+		$config['notice-dismissed'] = true;
+		self::update_config( $config );
+
+		return wp_send_json_success();
 	}
 
 	public static function placeholder( $key = null ) {
@@ -50,6 +88,9 @@ class Pageviews {
 		return $content;
 	}
 
+	/**
+	 * Compat styles.
+	 */
 	public static function compat_wp_head() {
 		?>
 		<style>
@@ -60,11 +101,17 @@ class Pageviews {
 		<?php
 	}
 
+	/**
+	 * Pageviews front-end scripts.
+	 */
 	public static function enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
 		add_action( 'wp_footer', array( __CLASS__, 'wp_footer' ) );
 	}
 
+	/**
+	 * Output async script in footer.
+	 */
 	public static function wp_footer() {
 		$account = self::get_account_key();
 		if ( empty( $account ) )
@@ -88,39 +135,69 @@ class Pageviews {
 		<?php
 	}
 
-	public static function get_account_key() {
+	/**
+	 * Return a configuration array.
+	 *
+	 * @return array
+	 */
+	public static function get_config() {
 		if ( isset( self::$_config ) )
-			return self::$_config['account'];
+			return self::$_config;
 
-		self::$_config = get_option( 'pageviews_config', array(
+		$defaults = array(
 			'account' => '',
 			'secret' => '',
-		) );
+			'notice-dismissed' => false,
+		);
+
+		self::$_config = wp_parse_args( get_option( 'pageviews_config', array() ), $defaults );
+		return self::$_config;
+	}
+
+	/**
+	 * Update configuration.
+	 *
+	 * @param array $config New configuration.
+	 */
+	public static function update_config( $config ) {
+		update_option( 'pageviews_config', $config );
+		self::$_config = $config;
+	}
+
+	/**
+	 * Get the account key
+	 *
+	 * @return string The account key.
+	 */
+	public static function get_account_key() {
+		$config = self::get_config();
+		if ( ! empty( $config['account'] ) )
+			return $config['account'];
 
 		// Don't attempt to re-register more frequently than once every 12 hours.
 		$can_register = true;
-		if ( ! empty( self::$_config['register_error'] ) && time() - self::$_config['register_error'] < 12 * HOUR_IN_SECONDS )
+		if ( ! empty( $config['register-error'] ) && time() - $config['register-error'] < 12 * HOUR_IN_SECONDS )
 			$can_register = false;
 
 		// Obtain a new account key if necessary.
-		if ( empty( self::$_config['account'] ) && $can_register ) {
+		if ( empty( $config['account'] ) && $can_register ) {
 
 			// TODO: Better locking.
-			self::$_config['register_error'] = time();
-			update_option( 'pageviews_config', self::$_config );
+			$config['register-error'] = time();
+			self::update_config( $config );
 
 			$request = wp_remote_post( self::$_base . '/register' );
 			if ( ! is_wp_error( $request ) && wp_remote_retrieve_response_code( $request ) == 200 ) {
 				$response = json_decode( wp_remote_retrieve_body( $request ) );
-				self::$_config['account'] = $response->account;
-				self::$_config['secret'] = $response->secret;
-				unset( self::$_config['register_error'] );
+				$config['account'] = $response->account;
+				$config['secret'] = $response->secret;
+				unset( $config['register-error'] );
 
-				update_option( 'pageviews_config', self::$_config );
+				self::update_config( $config );
 			}
 		}
 
-		return self::$_config['account'];
+		return $config['account'];
 	}
 }
 

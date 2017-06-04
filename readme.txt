@@ -13,6 +13,8 @@ A simple and lightweight pageviews counter for your WordPress posts and pages.
 
 Pageviews is a simple and lightweight views counter for your WordPress posts and pages. It is based on JavaScript and is compatible with all caching plugins, proxies and complex setups. Pageviews works with a hosted processing service, and performs extremely well under high-traffic and on sites with large amounts of content.
 
+**Don't start from scratch!** Import existing numbers from Google Analytics and other services with [Pageviews Sync](https://pageviews.io/sync/).
+
 = Features =
 
 * Display the number of times a post or page has been viewed
@@ -20,9 +22,9 @@ Pageviews is a simple and lightweight views counter for your WordPress posts and
 * Includes useful hooks and APIs for seamless integration into third-party themes
 * Compatible with caching plugins, proxies and application firewalls
 
-For an installation and configuration guide please visit the [full documentation on GitHub](https://github.com/pressjitsu/pageviews).
+More information on [Pageviews.io](https://pageviews.io).
 
-If you need any setup assistance or help migrating your existing views counts from other plugins or services (such as Jetpack, Google Analytics, etc.) please reach out to [Pressjitsu](https://pressjitsu.com) via live chat or e-mail, or open a new thread in the WordPress.org support forums.
+If you need any setup assistance or help migrating your existing views counts from other plugins or services please reach out to us [via e-mail](https://pageviews.io/contact/), or open a new thread in the WordPress.org support forums. For best performance Pageviews uses an external service to collect and process numbers. Visit our [terms of service](https://pageviews.io/tos/) and [privacy policy](https://pageviews.io/privacy/) for more details.
 
 == Installation ==
 
@@ -47,7 +49,7 @@ Installing via Git:
 `cd wp-content/plugins
 git clone https://github.com/pressjitsu/pageviews.git`
 
-For an installation and configuration guide please visit the [full documentation](https://github.com/pressjitsu/pageviews).
+For an installation and configuration guide please visit the [full documentation on GitHub](https://github.com/pressjitsu/pageviews).
 
 == Screenshots ==
 
@@ -56,6 +58,10 @@ For an installation and configuration guide please visit the [full documentation
 3. Default output of the views counter for themes that don't provide explicit support for this plugin
 
 == Changelog ==
+
+= 0.9.3 =
+* Add compatibility for Pageviews Sync
+* Better configuration handling methods
 
 = 0.9.2 =
 * Add support for multiple containers per page for a single key
