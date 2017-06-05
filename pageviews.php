@@ -3,7 +3,7 @@
  * Plugin Name: Pageviews
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
  * Plugin URI: https://pageviews.io
- * Version: 0.9.2
+ * Version: 0.9.3
  * License: GPLv3 or later
  */
 
