@@ -2,6 +2,8 @@
 
 Pageviews is a simple and lightweight views counter for your WordPress posts and pages. It is based on JavaScript and is compatible with all caching plugins, proxies and complex setups. Pageviews works with a hosted processing service, and performs extremely well under high-traffic and on sites with large amounts of content.
 
+Check out [Pageviews.io](https://pageviews.io) for more information.
+
 ## Installation
 
 Extract the archive contents into your `wp-content/plugins/pageviews` directory and activate the Pageviews plugin through the WordPress plugin management interface or WP-CLI. After activating, your website will start counting and displaying your pageviews immediately.
