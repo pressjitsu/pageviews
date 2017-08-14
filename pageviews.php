@@ -79,7 +79,7 @@ class Pageviews {
 	}
 
 	public static function get_placeholder( $key ) {
-		return '<span class="pageviews-placeholder" data-key="' . esc_attr( $key ) . '"></span>';
+		return sprintf( '<span class="pageviews-placeholder" data-key="%s">%s</span>', esc_attr( $key ), apply_filters( 'pageviews_placeholder_preload', '' ) );
 	}
 
 	public static function compat_the_content( $content ) {
