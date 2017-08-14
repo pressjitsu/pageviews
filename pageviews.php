@@ -21,7 +21,7 @@ class Pageviews {
 
 		// Admin notices + dismiss handler.
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notices' ) );
-		add_action( 'wp_ajax_pageviews-dismiss-notice', array( __CLASS__, 'ajax_dimsiss_notice' ) );
+		add_action( 'wp_ajax_pageviews-dismiss-notice', array( __CLASS__, 'ajax_dismiss_notice' ) );
 	}
 
 	public static function template_redirect() {
@@ -57,7 +57,7 @@ class Pageviews {
 		include_once plugin_dir_path( __FILE__ ) . 'templates/admin-notice.php';
 	}
 
-	public static function ajax_dimsiss_notice() {
+	public static function ajax_dismiss_notice() {
 		if ( empty( $_REQUEST['nonce'] ) )
 			return wp_send_json_error();
 
