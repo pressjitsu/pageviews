@@ -8,6 +8,12 @@
 			keys = [],
 			elements = {};
 
+		if (!config.output_filter) {
+			config.output_filter = function(t) {
+				return t;
+			};
+		}
+
 		$('.pageviews-placeholder').each(function() {
 			var $el = $(this),
 				key = $el.data('key');
@@ -34,7 +40,7 @@
 				for (var i in e) {
 					if (elements[i]) {
 						for (var j in elements[i]) {
-							elements[i][j].text(e[i]);
+							elements[i][j].text(config.output_filter(e[i]));
 						}
 					}
 				}
@@ -53,7 +59,7 @@
 					if (elements[i]) {
 						for (var j in elements[i]) {
 							el = elements[i][j];
-							el.text(e[i]);
+							el.text(config.output_filter(e[i]));
 							el.data('pv-processed', 1);
 						}
 					}

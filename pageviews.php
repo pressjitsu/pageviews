@@ -126,6 +126,7 @@ class Pageviews {
 		<!-- Pageviews SDK -->
 		<script>
 		var _pv_config = <?php echo json_encode( $config ); ?>;
+		<?php do_action( 'pageviews_before_js', $config ); ?>
 		(function(){
 			var js = document.createElement('script'); js.type = 'text/javascript'; js.async = true;
 			js.src = '<?php echo esc_js( plugins_url( '/pageviews.js?v=' . self::$_js_version, __FILE__ ) ); ?>';
