@@ -1,0 +1,77 @@
+# Copyright (C) 2018 Pageviews
+# This file is distributed under the same license as the Pageviews package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pageviews 0.10.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pageviews\n"
+"POT-Creation-Date: 2018-04-09 06:01:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: pageviews.php:60
+msgid ""
+"Thank you for using Pageviews! <strong>Sync your numbers</strong> from "
+"Google Analytics and other services with <a href=\"%s\" target=\"_blank"
+"\">Pageviews Sync</a>."
+msgstr ""
+
+#: pageviews.php:62
+msgid ""
+"Thank you for using Pageviews! <strong>Don't start from scratch!</strong> "
+"Import existing numbers from Google Analytics and other services with <a "
+"href=\"%s\" target=\"_blank\">Pageviews Sync</a>."
+msgstr ""
+
+#: templates/auth.php:7
+msgid "Connect to Pageviews.io"
+msgstr ""
+
+#: templates/auth.php:91
+msgid "Share Site Data with Pageviews.io"
+msgstr ""
+
+#: templates/auth.php:101
+msgid ""
+"Pageviews Sync is requesting temporary read-only permission to securely "
+"access the following information from your site <strong>%s</strong>:"
+msgstr ""
+
+#: templates/auth.php:105
+msgid "Your Pageviews plugin public API key"
+msgstr ""
+
+#: templates/auth.php:106
+msgid "All public post IDs and permalinks"
+msgstr ""
+
+#: templates/auth.php:110
+msgid ""
+"For more information, visit the Pageviews.io <a href=\"%s\" target=\"_blank"
+"\">privacy policy</a>."
+msgstr ""
+
+#: templates/auth.php:114
+msgid "Allow Access"
+msgstr ""
+
+#: templates/auth.php:115
+msgid "No, thanks"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Pageviews"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://pageviews.io"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A simple and lightweight pageviews counter for your WordPress posts and "
+"pages."
+msgstr ""
