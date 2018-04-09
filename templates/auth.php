@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Connect to Pageviews.io</title>
+	<title><?php esc_html_e( 'Connect to Pageviews.io', 'pageviews' ); ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 	<style>
 	body{
@@ -88,7 +88,7 @@
 			<div class="auth-wrapper">
 				<em class="line"></em>
 				<div class="auth-data">
-					<h3>Share Site Data with Pageviews.io</h3>
+					<h3><?php esc_html_e( 'Share Site Data with Pageviews.io', 'pageviews' ); ?></h3>
 
 					<?php
 						$url = preg_replace( '#^https?://#', '', untrailingslashit( home_url() ) );
@@ -97,18 +97,22 @@
 						$deny_url = add_query_arg( 'deny', 1, Pageviews::$_base_sync . '/a/1.0/sync/callback/' );
 					?>
 
-					<p>Pageviews Sync is requesting temporary read-only permission to securely access the following information
-						from your site <strong><?php echo esc_html( $url ); ?></strong>:</p>
+					<p><?php printf(
+						__( 'Pageviews Sync is requesting temporary read-only permission to securely access the following information from your site <strong>%s</strong>:', 'pageviews' ),
+						esc_html( $url ) ); ?></p>
 
 					<ul>
-						<li>Your Pageviews plugin public API key</li>
-						<li>All public post IDs and permalinks</li>
+						<li><?php esc_html_e( 'Your Pageviews plugin public API key', 'pageviews' ); ?></li>
+						<li><?php esc_html_e( 'All public post IDs and permalinks', 'pageviews' ); ?></li>
 					</ul>
 
-					<p><small>For more information, visit the Pageviews.io <a href="https://pageviews.io/privacy/" target="_blank">privacy policy</a>.</small></p>
+					<p><small><?php printf(
+						__( 'For more information, visit the Pageviews.io <a href="%s" target="_blank">privacy policy</a>.', 'pageviews' ),
+						esc_url( 'https://pageviews.io/privacy/' )
+					); ?></small></p>
 
-					<a class="button" href="<?php echo esc_url( $allow_url ); ?>">Allow Access</a>
-					<a href="<?php echo esc_url( $deny_url ); ?>">No thanks</a>
+					<a class="button" href="<?php echo esc_url( $allow_url ); ?>"><?php esc_html_e( 'Allow Access', 'pageviews' ); ?></a>
+					<a href="<?php echo esc_url( $deny_url ); ?>"><?php esc_html_e( 'No, thanks', 'pageviews' ); ?></a>
 
 				</div>
 				<div class="clear"></div>

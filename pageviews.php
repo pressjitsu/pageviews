@@ -3,7 +3,9 @@
  * Plugin Name: Pageviews
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
  * Plugin URI: https://pageviews.io
- * Version: 0.9.3
+ * Version: 0.10.0
+ * Text Domain: pageviews
+ * Domain Path: /languages/
  * License: GPLv3 or later
  */
 
@@ -22,6 +24,12 @@ class Pageviews {
 		// Admin notices + dismiss handler.
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notices' ) );
 		add_action( 'wp_ajax_pageviews-dismiss-notice', array( __CLASS__, 'ajax_dismiss_notice' ) );
+
+		add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
+	}
+
+	public static function load_textdomain() {
+		load_plugin_textdomain( 'pageviews', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	public static function template_redirect() {
@@ -49,10 +57,12 @@ class Pageviews {
 
 		// Display a different notice based on whether the user is new or existing.
 		if ( ! empty( $config['account'] ) ) {
-			$message = 'Thank you for using Pageviews! <strong>Sync your numbers</strong> from Google Analytics and other services with <a href="https://pageviews.io/sync/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=existing" target="_blank">Pageviews Sync</a>.';
+			$message = __( 'Thank you for using Pageviews! <strong>Sync your numbers</strong> from Google Analytics and other services with <a href="%s" target="_blank">Pageviews Sync</a>.', 'pageviews' );
 		} else {
-			$message = 'Thank you for using Pageviews! <strong>Don\'t start from scratch!</strong> Import existing numbers from Google Analytics and other services with <a href="https://pageviews.io/sync/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=new" target="_blank">Pageviews Sync</a>.';
+			$message = __( 'Thank you for using Pageviews! <strong>Don\'t start from scratch!</strong> Import existing numbers from Google Analytics and other services with <a href="%s" target="_blank">Pageviews Sync</a>.', 'pageviews' );
 		}
+
+		$message = sprintf( $message, 'https://pageviews.io/sync/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=existing' );
 
 		include_once plugin_dir_path( __FILE__ ) . 'templates/admin-notice.php';
 	}
