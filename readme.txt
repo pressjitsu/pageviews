@@ -62,6 +62,8 @@ For an installation and configuration guide please visit the [full documentation
 = 0.10.0 =
 * Added i18n
 * Russian translation
+* Added config.output_filter JavaScript filter for developers to filter the output number
+* A couple of typos
 
 = 0.9.3 =
 * Add compatibility for Pageviews Sync
