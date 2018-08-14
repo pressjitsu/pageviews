@@ -132,6 +132,8 @@ class Pageviews {
 			'incr' => self::$_incr,
 			'base' => self::$_base,
 		);
+		
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		?>
 		<!-- Pageviews SDK -->
 		<script>
@@ -139,7 +141,7 @@ class Pageviews {
 		<?php do_action( 'pageviews_before_js', $config ); ?>
 		(function(){
 			var js = document.createElement('script'); js.type = 'text/javascript'; js.async = true;
-			js.src = '<?php echo esc_js( plugins_url( '/pageviews.js?v=' . self::$_js_version, __FILE__ ) ); ?>';
+			js.src = '<?php echo esc_js( plugins_url( '/pageviews' . $suffix. '.js?v=' . self::$_js_version, __FILE__ ) ); ?>';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
 		})();
 		</script>
