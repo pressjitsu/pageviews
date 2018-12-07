@@ -2,8 +2,8 @@
 Contributors: pressjitsu, soulseekah
 Tags: pageviews, analytics, counter, views, hits, stats
 Requires at least: 4.4
-Tested up to: 4.9.5
-Stable tag: 0.10.0
+Tested up to: 5.0
+Stable tag: 0.11.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,10 @@ For an installation and configuration guide please visit the [full documentation
 3. Default output of the views counter for themes that don't provide explicit support for this plugin
 
 == Changelog ==
+
+= 0.11.0 =
+* Added pageviews_script_version_param filter to remove JS version fragment
+* Added minification. Enjoy your pagespeeds.
 
 = 0.10.0 =
 * Added i18n

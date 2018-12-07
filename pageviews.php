@@ -3,7 +3,7 @@
  * Plugin Name: Pageviews
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
  * Plugin URI: https://pageviews.io
- * Version: 0.10.0
+ * Version: 0.11.0
  * Text Domain: pageviews
  * Domain Path: /languages/
  * License: GPLv3 or later
@@ -134,6 +134,7 @@ class Pageviews {
 		);
 		
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$version = apply_filters( 'pageviews_script_version_param', '?v=' . self::$_js_version );
 		?>
 		<!-- Pageviews SDK -->
 		<script>
@@ -141,7 +142,7 @@ class Pageviews {
 		<?php do_action( 'pageviews_before_js', $config ); ?>
 		(function(){
 			var js = document.createElement('script'); js.type = 'text/javascript'; js.async = true;
-			js.src = '<?php echo esc_js( plugins_url( '/pageviews' . $suffix. '.js?v=' . self::$_js_version, __FILE__ ) ); ?>';
+			js.src = '<?php echo esc_js( plugins_url( '/pageviews' . $suffix. '.js' . $version, __FILE__ ) ); ?>';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
 		})();
 		</script>
