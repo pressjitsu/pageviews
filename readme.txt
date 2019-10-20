@@ -51,6 +51,14 @@ git clone https://github.com/pressjitsu/pageviews.git`
 
 For an installation and configuration guide please visit the [full documentation on GitHub](https://github.com/pressjitsu/pageviews).
 
+Integration example:
+
+https://github.com/gravityview/GravityView/issues/1001
+
+API documentation:
+
+https://pv.pjtsu.com/
+
 == Screenshots ==
 
 1. Customized implementation of the pageviews output, styled specifically for this theme
