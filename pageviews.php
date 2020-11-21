@@ -4,6 +4,7 @@
  * Description: A simple and lightweight pageviews counter for your WordPress posts and pages.
  * Plugin URI: https://pageviews.io
  * Version: 0.11.0
+ * Requires PHP: 5.2
  * Text Domain: pageviews
  * Domain Path: /languages/
  * License: GPLv3 or later
@@ -132,7 +133,7 @@ class Pageviews {
 			'incr' => self::$_incr,
 			'base' => self::$_base,
 		);
-		
+
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		$version = apply_filters( 'pageviews_script_version_param', '?v=' . self::$_js_version );
 		?>
