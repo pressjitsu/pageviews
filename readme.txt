@@ -2,7 +2,7 @@
 Contributors: pressjitsu, soulseekah
 Tags: pageviews, analytics, counter, views, hits, stats
 Requires at least: 4.4
-Tested up to: 5.0
+Tested up to: 5.5
 Stable tag: 0.11.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
